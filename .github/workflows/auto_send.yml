@@ -1,0 +1,29 @@
+name: Auto Send Weather
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  send_info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pytz
+
+      - name: Run Send Weather to BPJI
+        env:
+          SEND_INFO: ${{ secrets.SEND_INFO }}
+          CALL_NUMBER: ${{ secrets.CALL_NUMBER }}
+        run: |
+          python BPJI_Auto_Weather.py
