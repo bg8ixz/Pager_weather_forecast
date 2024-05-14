@@ -10,7 +10,7 @@
 | :------------: | :------------: | :------------: | :------------: |
 |1|url|发送服务Web端地址|请联系服务商|
 |2|api_key|天气Web API KEY|a8765d2e3f9c410b86c57d14f3e02967|
-|3|city_code|城市代码|https://github.com/qwd/LocationList/blob/master/China-City-List-latest.csv|
+|3|city_code|城市代码|[和风天气城市列表](https://github.com/qwd/LocationList/blob/master/China-City-List-latest.csv)|
 |4|region|区域信息|重庆城区|
 |5|STN|信息发送站点|重庆46023传呼台|
 
