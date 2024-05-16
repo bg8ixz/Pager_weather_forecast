@@ -128,6 +128,6 @@ for call in call_numbers:
     print(f"提交信息：{full_url}")      # 主要为了查看终端是否发送成功
 
     # 等待一个延迟发送的随机时间（怕背不住）
-    time.sleep(random.uniform(8, 15))
+    time.sleep(random.uniform(20, 30))
 
 print("【温馨提醒】所有传呼台终端天气预报已发送完毕！")
