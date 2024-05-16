@@ -3,7 +3,7 @@
 脚本名称：Pager weather forecast
 脚本地址: https://github.com/bg8ixz/Pager_weather_forecast
 脚本版本: 1.0.3
-更新内容：* 增加多ID发送天气预报以及次日天气预报； * 增加发送随机时长间隔，保护发射机；
+更新内容：* 增加多ID发送天气预报以及次日天气预报； * 增加发送随机时长间隔，保护发射机； * 增加发送结果微信推送；
 """
 import os
 import requests
@@ -14,6 +14,10 @@ import json
 import pytz
 import random
 
+WECHAT_ROBOT_KEY  = os.getenv('WECHAT_ROBOT_KEY')      # 需要替换成你的企业微信机器人的Webhook Key，参考 https://open.work.weixin.qq.com/help2/pc/14931
+webhook_url = f'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={WECHAT_ROBOT_KEY}'     # 企业微信机器人的Webhook地址
+
+beijing_time = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
 today_date = datetime.today().strftime("%Y年%m月%d日")
 taskno = int(time.time() * 1000)  # 获取当前时间的时间戳
 
@@ -96,6 +100,12 @@ def get_weather_forecast(api_key, city_code):
     else:
         return f"【{today_date}】抱歉，天气预报服务好像出了问题，请向管理员反馈！[{STN}]"
 
+weather_forecast = get_weather_forecast(api_key, city_code)     # 调用一次天气API节约资源
+# 初始化天气预报发送成功和失败的计数器
+success_count = 0
+failure_count = 0
+# 初始化失败的ID列表
+failed_bpjiid = []
 # 遍历所有BB机ID号，发送信息
 for call in call_numbers:
     print(f"原始的BB机ID号: {call}")    # 控制台被隐藏，我得试试看！
@@ -108,7 +118,7 @@ for call in call_numbers:
     params = {
         'taskno': int(time.time() * 1000),  # 当前时间的时间戳（GET请求需要）
         'call': call,  # BB机ID号
-        'msg': get_weather_forecast(api_key, city_code)  # 获取天气信息
+        'msg': weather_forecast  # 获取天气信息
     }
 
     # 将参数编码为URL查询字符串
@@ -122,12 +132,35 @@ for call in call_numbers:
 
     print(f"系统时间：{system_time}\n北京时间：{beijing_time}")
     if response.text == "0":
+        success_count += 1  # 成功次数加1
         print(f"{call}：天气预报发送成功（{response.text}）！")
     else:
+        failure_count += 1  # 失败次数加1
+        failed_bpjiid.append(call)      # 将失败的ID添加到列表中
         print(f"{call}：天气预报发送失败：{response.text}！")
     print(f"提交信息：{full_url}")      # 主要为了查看终端是否发送成功
 
     # 等待一个延迟发送的随机时间（怕背不住）
     time.sleep(random.uniform(20, 30))
 
+if failed_bpjiid:
+    failed_bpjiid_info = "、".join(failed_bpjiid)  # 将ID列表转换为字符串
+    wechat_message = f"[太阳]{weather_forecast}\n-------------------------------------\n[哇]发送成功：{success_count}个\n[裂开]发送失败：{failure_count}个\n-------------------------------------\n失败ID列表：{failed_bpjiid_info}\n-------------------------------------\n执行时间：{beijing_time}"
+else:
+    wechat_message = f"[太阳]{weather_forecast}\n-------------------------------------\n[哇]发送成功：{success_count}个\n[裂开]发送失败：{failure_count}个\n-------------------------------------\n执行时间：{beijing_time}"
+
+headers = {'Content-Type': 'application/json'}
+message = {
+    'msgtype': 'text',
+    'text': {
+        'content': wechat_message
+    }
+}
+
+webhook_reply = requests.post(webhook_url, headers=headers, data=json.dumps(message))       # 发送微信通知
+
+if webhook_reply.ok:
+    print(f"企业微信通知发送成功！")
+else:
+    print(f"企业微信通知发送失败 - {webhook_reply.text}")
 print("【温馨提醒】所有传呼台终端天气预报已发送完毕！")

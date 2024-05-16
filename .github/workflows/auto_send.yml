@@ -2,7 +2,7 @@ name: Auto Send Weather
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '20 1 * * *'
 
 jobs:
   send_info:
@@ -25,5 +25,6 @@ jobs:
         env:
           SEND_INFO: ${{ secrets.SEND_INFO }}
           CALL_NUMBER: ${{ secrets.CALL_NUMBER }}
+          WECHAT_ROBOT_KEY: ${{ secrets.WECHAT_ROBOT_KEY }}
         run: |
           python BPJI_Auto_Weather.py
