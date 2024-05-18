@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  auto-weather-warning:
+  send_weather_warning:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -30,3 +30,11 @@ jobs:
         WARNING_INFO_URL: ${{ secrets.WARNING_INFO_URL }}
       run: |
         python BPJI_Weather_warning.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add weather_warning_info.txt
+        git commit -m "Update weather_warning_info.txt [skip ci]" || echo "No changes to commit"
+        git push origin ${{ github.ref }}
