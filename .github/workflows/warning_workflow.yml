@@ -37,6 +37,6 @@ jobs:
         git config --local user.name "GitHub Action"
         git add weather_warning_info.txt
         git commit -m "Update weather_warning_info.txt [skip ci]" || echo "No changes to commit"
-        git push origin ${{ github.ref }}
+        git push --force
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
