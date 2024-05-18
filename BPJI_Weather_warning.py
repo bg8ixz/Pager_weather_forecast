@@ -11,7 +11,7 @@ import os
 import random
 import time
 from datetime import datetime
-import urllib.parse as urlencode
+import urllib.parse as up
 import pytz
 
 # 从配置的CALL_NUMBER获取BB机ID号列表
@@ -174,7 +174,7 @@ if warning_info and isinstance(warning_info, dict) and 'description' in warning_
             }
 
             # 将参数编码为URL查询字符串
-            query_string = urlencode(params)
+            query_string = up.urlencode(params)
 
             # 完整的请求URL
             full_url = f"{url}?{query_string}"
