@@ -39,4 +39,4 @@ jobs:
         git commit -m "Update weather_warning_info.txt [skip ci]" || echo "No changes to commit"
         git push origin ${{ github.ref }}
       env:
-        GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
