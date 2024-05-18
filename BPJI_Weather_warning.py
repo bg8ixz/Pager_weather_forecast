@@ -195,6 +195,7 @@ if warning_info and isinstance(warning_info, dict) and 'description' in warning_
             # 等待一个延迟发送的随机时间（怕背不住）
             time.sleep(random.uniform(20, 30))        
         send_wechat_message(webhook_url, warning_info)
+        print(f"发送成功：{success_count}个\n发送失败：{failure_count}个")
     else:
         print("【温馨提醒】预警信息无变化，暂不发送新通知。")        
 else:
