@@ -15,7 +15,7 @@ import urllib.parse as urlencode
 import pytz
 
 # 从配置的CALL_NUMBER获取BB机ID号列表
-call_number_raw = os.environ['CALL_NUMBER', '']
+call_number_raw = os.environ['CALL_NUMBER']
 call_numbers = [call for call in call_number_raw.strip().split('\n') if call]
 
 # 获取配置信息
