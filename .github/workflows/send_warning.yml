@@ -3,7 +3,7 @@ name: Send Weather Warning
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   send_weather_warning:
