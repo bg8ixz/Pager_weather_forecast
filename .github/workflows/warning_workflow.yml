@@ -1,4 +1,4 @@
-name: Weather Warning
+name: Send Weather Warning
 
 on:
   workflow_dispatch:
