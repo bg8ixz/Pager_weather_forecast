@@ -1,5 +1,9 @@
 # 重庆46023传呼台 - 业余无线电台站
-![Static Badge](https://img.shields.io/badge/MMDVM-46023-green)  |  ![Static Badge](https://img.shields.io/badge/%E9%87%8D%E5%BA%86%E6%97%A0%E7%BA%BF%E7%94%B5-%E4%BC%A0%E5%91%BC%E5%8F%B0-blue)  |  ![Static Badge](https://img.shields.io/badge/%E4%BC%A0%E5%91%BC%E5%8F%B0-%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5-orange)  |  ![Static Badge](https://img.shields.io/badge/%E4%BC%A0%E5%91%BC%E5%8F%B0-%E5%A4%A9%E6%B0%94%E9%A2%84%E8%AD%A6-red)
+![Static Badge](https://img.shields.io/badge/MMDVM-46023-green)    ![Static Badge](https://img.shields.io/badge/%E9%87%8D%E5%BA%86%E6%97%A0%E7%BA%BF%E7%94%B5-%E4%BC%A0%E5%91%BC%E5%8F%B0-blue)    ![Static Badge](https://img.shields.io/badge/%E4%BC%A0%E5%91%BC%E5%8F%B0-%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5-orange)    ![Static Badge](https://img.shields.io/badge/%E4%BC%A0%E5%91%BC%E5%8F%B0-%E5%A4%A9%E6%B0%94%E9%A2%84%E8%AD%A6-red)
+
+## 通知说明
+　　传呼机通知列表为手动添加，暂时未做实时获取，故而有需要接收`天气预报`及`天气预警`（仅限重庆地区）的友台：
+> 请微信上联系我，或者直接告知`BD7EM`、`BG8LAK`均可（可以通过`中继台`进行呼号）。
 
 ## 文件说明
 |  序号 |  文件名 |  用途 |
